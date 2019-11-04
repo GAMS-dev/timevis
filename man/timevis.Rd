@@ -8,7 +8,7 @@
 \usage{
 timevis(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   options, width = NULL, height = NULL, elementId = NULL,
-  loadDependencies = TRUE, timezone = NULL)
+  timezone = NULL)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the
@@ -53,10 +53,6 @@ automatically.}
 
 \item{elementId}{Use an explicit element ID for the widget (rather than an
 automatically generated one). Ignored when used in a Shiny app.}
-
-\item{loadDependencies}{Whether to load JQuery and bootstrap
-dependencies (you should only set to \code{FALSE} if you manually include
-them)}
 
 \item{timezone}{By default, the timevis widget displays times in the local
 time of the browser rendering it. You can set timevis to display times in

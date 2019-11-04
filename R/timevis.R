@@ -45,9 +45,6 @@
 #' automatically.
 #' @param elementId Use an explicit element ID for the widget (rather than an
 #' automatically generated one). Ignored when used in a Shiny app.
-#' @param loadDependencies Whether to load JQuery and bootstrap
-#' dependencies (you should only set to \code{FALSE} if you manually include
-#' them)
 #' @param timezone By default, the timevis widget displays times in the local
 #' time of the browser rendering it. You can set timevis to display times in
 #' another time zone by providing a number between -15 to 15 to specify the
@@ -320,7 +317,7 @@
 #' @export
 timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     options, width = NULL, height = NULL, elementId = NULL,
-                    loadDependencies = TRUE, timezone = NULL) {
+                    timezone = NULL) {
 
   # Validate the input data
   if (missing(data)) {
@@ -335,11 +332,11 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     stop("timevis: 'data' must contain a 'start' date for each item",
          call. = FALSE)
   }
-  if (!missing(groups) && !is.data.frame(groups)) {
+  if (!missing(groups) && !is.null(groups) && !is.data.frame(groups)) {
     stop("timevis: 'groups' must be a data.frame",
          call. = FALSE)
   }
-  if (!missing(groups) && nrow(groups) > 0 &&
+  if (!missing(groups) && !is.null(groups) && nrow(groups) > 0 &&
       (!"id" %in% colnames(groups) || !"content" %in% colnames(groups) )) {
     stop("timevis: 'groups' must contain a 'content' and 'id' variables",
          call. = FALSE)
@@ -372,7 +369,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   }
 
   items <- dataframeToD3(data)
-  if (missing(groups)) {
+  if (missing(groups) || is.null(groups)) {
     groups <- NULL
   } else {
     groups <- dataframeToD3(groups)
@@ -394,15 +391,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   # initialization
   x$api <- list()
 
-  # add dependencies so that the zoom buttons will work in non-Shiny mode
-  if (loadDependencies) {
-    deps <- list(
-      rmarkdown::html_dependency_jquery(),
-      rmarkdown::html_dependency_bootstrap("default")
-    )
-  } else {
-    deps <- NULL
-  }
+  deps <- NULL
 
   # create widget
   htmlwidgets::createWidget(

@@ -1,9 +1,11 @@
 Package: timevis
-Title: Create Interactive Timeline Visualizations in R
-Version: 0.5.0.9004
+Title: Create Interactive Timeline Visualizations in R (modified for use in MIRO)
+Version: 0.5.0.9999
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = "R interface"),
+    person("Frederik", "Proske", email = "fproske@gams.com",
+       role = c("aut"), comment = "MIRO integration"),
     person(family = "Almende B.V.", role = c("aut", "cph"),
        comment = "vis.js library, http://visjs.org, http://www.almende.com/home")
       )
@@ -21,10 +23,8 @@ Imports:
     htmltools (>= 0.2.6),
     htmlwidgets (>= 0.6),
     jsonlite,
-    lubridate,
     magrittr,
     methods,
-    rmarkdown,
     shiny
 Suggests:
     knitr (>= 1.7),
