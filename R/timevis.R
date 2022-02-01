@@ -4,12 +4,16 @@
 #' Timelines can be included in Shiny apps and R markdown documents, or viewed
 #' from the R console and RStudio Viewer. \code{timevis} Includes an extensive
 #' API to manipulate a timeline after creation, and supports getting data out of
-#' the visualization into R. Based on the \href{http://visjs.org/}{'vis.js'}
-#' Timeline module and the \href{http://www.htmlwidgets.org/}{'htmlwidgets'} R
-#' package.\cr\cr
-#' View a \href{http://daattali.com/shiny/timevis-demo/}{demo Shiny app}
+#' the visualization into R. Based on the \href{https://visjs.org/}{'visjs'}
+#' Timeline JavaScript library.\cr\cr
+#' View a \href{https://daattali.com/shiny/timevis-demo/}{demo Shiny app}
 #' or see the full \href{https://github.com/daattali/timevis}{README} on
-#' GitHub.
+#' GitHub.\cr\cr
+#' **Important note:** This package provides a way to use the
+#' \href{https://visjs.org/}{visjs Timeline JavaScript library} within R.
+#' The visjs Timeline library has many features that cannot all be documented
+#' here. To see the full details on what the timeline can support, please read the
+#' official documentation of visjs Timeline.
 #'
 #' @param data A dataframe containing the timeline items. Each item on the
 #' timeline is represented by a row in the dataframe. \code{start} and
@@ -31,7 +35,7 @@
 #' current date.
 #' @param options A named list containing any extra configuration options to
 #' customize the timeline. All available options can be found in the
-#' \href{http://visjs.org/docs/timeline/#Configuration_Options}{official
+#' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Configuration_Options}{official
 #' Timeline documentation}. Note that any options that define a JavaScript
 #' function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
 #' examples section below to see example usage.
@@ -53,19 +57,23 @@
 #' @return A timeline visualization \code{htmlwidgets} object
 #' @section Data format:
 #' The \code{data} parameter supplies the input dataframe that describes the
-#' items in the timeline. The following variables are supported for the items
-#' dataframe:
+#' items in the timeline. The following is a subset of the variables supported
+#' in the items dataframe (the full list of supported variables can be found in
+#' the \href{https://visjs.github.io/vis-timeline/docs/timeline/#Data_Format}{official
+#' visjs documentation}):
 #' \itemize{
 #'   \item{\strong{\code{start}}} - (required) The start date of the item, for
-#'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
+#'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}. To specify BCE
+#'   dates you must use 6 digits (for example `"-000600"` corresponds to year 600BCE).
+#'   To specify dates between year 0 and year 99 CE, you must use 4 digits.
 #'   \item{\strong{\code{content}}} - (required) The contents of the item. This
 #'   can be plain text or HTML code.
 #'   \item{\strong{\code{end}}} - The end date of the item. The end date is
 #'   optional. If end date is provided, the item is displayed as a range. If
 #'   not, the item is displayed as a single point on the timeline.
 #'   \item{\strong{\code{id}}} - An id for the item. Using an id is not required
-#'   but highly recommended. An id is needed when removing or selecting items
-#'   (using \code{\link[timevis]{removeItem}} or
+#'   but highly recommended, and must be unique. An id is needed when removing or
+#'   selecting items (using \code{\link[timevis]{removeItem}} or
 #'   \code{\link[timevis]{setSelection}}).
 #'   \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
 #'   'point', 'range', or 'background'. Types 'box' and 'point' need only a
@@ -147,6 +155,8 @@
 #'   containing the minimum and maximum dates currently visible in the timeline.
 #'   The input is updated every time the viewable window of dates is updated
 #'   (by zooming or moving the window).
+#'   \item{\strong{\code{input$mytime_visible}}} - will return a list of IDs of items currently
+#'   visible in the timeline.
 #' }
 #' All four inputs will return a value upon initialization of the timeline and
 #' every time the corresponding value is updated.
@@ -157,7 +167,7 @@
 #' \code{document.getElementById(id).widget.timeline} (replace \code{id} with
 #' the timeline's id).\cr\cr
 #' This timeline object is the direct widget that \code{vis.js} creates, and you
-#' can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
+#' can see the \href{https://visjs.github.io/vis-timeline/docs/timeline/}{visjs documentation} to
 #' see what actions you can perform on that object.
 #' @section Customizing the timevis look and style using CSS:
 #' To change the styling of individual items or group labels, use the
@@ -195,7 +205,7 @@
 #' htmltools::html_print(tv)
 #' }
 #' @examples
-#' # For more examples, see http://daattali.com/shiny/timevis-demo/
+#' # For more examples, see https://daattali.com/shiny/timevis-demo/
 #'
 #' #----------------------- Most basic -----------------
 #' timevis()
@@ -262,6 +272,34 @@
 #' )
 #'
 #'
+#' #----------------------- Using a custom format for hours ------------------
+#' timevis(
+#'   data.frame(
+#'     id = 1:2,
+#'     content = c("one", "two"),
+#'     start = c("2020-01-10", "2020-01-10 04:00:00")
+#'   ),
+#'   options = list(
+#'     format = htmlwidgets::JS("{ minorLabels: { minute: 'h:mma', hour: 'ha' }}")
+#'   )
+#' )
+#'
+#' #----------------------- Allowing editable items to "snap" to round hours only -------------
+#' timevis(
+#'   data.frame(
+#'     id = 1:2,
+#'     content = c("one", "two"),
+#'     start = c("2020-01-10", "2020-01-10 04:00:00")
+#'   ),
+#'   options = list(
+#'     editable = TRUE,
+#'     snap = htmlwidgets::JS("function (date, scale, step) {
+#'          var hour = 60 * 60 * 1000;
+#'          return Math.round(date / hour) * hour;
+#'      }")
+#'   )
+#' )
+#'
 #' #----------------------- Using groups -----------------
 #' timevis(data = data.frame(
 #'   start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
@@ -313,7 +351,7 @@
 #' shinyApp(ui, server)
 #' }
 #'
-#' @seealso \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
+#' @seealso \href{https://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 #' @export
 timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     options, width = NULL, height = NULL, elementId = NULL,
@@ -373,6 +411,10 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     groups <- NULL
   } else {
     groups <- dataframeToD3(groups)
+  }
+
+  if (!is.null(options[["start"]]) || !is.null(options[["end"]])) {
+    fit <- FALSE
   }
 
   # forward options using x

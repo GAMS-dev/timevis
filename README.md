@@ -1,38 +1,134 @@
-# timevis - Create interactive timeline visualizations in R
-
-[![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/daattali)
-[![Build
-Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
-[![CRAN
-version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
-
-> *Copyright 2016 [Dean Attali](https://deanattali.com). Licensed under
-> the MIT license.*
-
-`timevis` lets you create rich and *fully interactive* timeline
-visualizations in R. Timelines can be included in Shiny apps and R
-markdown documents, or viewed from the R console and RStudio Viewer.
-`timevis` includes an extensive API to manipulate a timeline after
-creation, and supports getting data out of the visualization into R.
-This package is based on the [vis.js](http://visjs.org/) Timeline module
-and the [htmlwidgets](http://www.htmlwidgets.org/) R package.
-
-**timevis is one of my many pet projects, but maintaining it and
-responding to daily questions has become very time consuming. If you
-find timevis useful, please consider showing your support :)**
-
 <p align="center">
 
-<a href="https://www.paypal.me/daattali">
-<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" />
+<h3 align="center">timevis</h3>
+
+<h4 align="center">Create interactive timeline visualizations in R
+<br><br>
+<a href="https://daattali.com/shiny/timevis-demo/">Demo</a>
+&middot;
+by <a href="https://deanattali.com">Dean Attali</a>
+</h4>
+
+<p align="center">
+<a href="https://github.com/daattali/timevis/actions">
+<img src="https://github.com/daattali/timevis/workflows/R-CMD-check/badge.svg" alt="R build status" />
 </a>
+<a href="https://cran.r-project.org/package=timevis">
+<img src="https://www.r-pkg.org/badges/version/timevis" alt="CRAN version" />
+</a>
+</p>
 
 </p>
 
+---
+
+<img src="inst/img/hex.png" width="170" align="right"/>
+
+{timevis} lets you create rich and *fully interactive* timeline
+visualizations in R. Timelines can be included in Shiny apps and R
+markdown documents, or viewed from the R console and RStudio Viewer.
+{timevis} includes an extensive API to manipulate a timeline after
+creation, and supports getting data out of the visualization into R.
+This package is based on the [visjs](https://visjs.org/) Timeline
+JavaScript library.
+
+**Need Shiny help? [I’m available for
+consulting](https://attalitech.com/).**<br/> **If you find {timevis}
+useful, please consider [supporting my
+work](https://github.com/sponsors/daattali) to unlock rewards\! ❤**
+
+<p align="center">
+
+<a style="display: inline-block;" href="https://github.com/sponsors/daattali">
+<img height="35" src="https://i.imgur.com/034B8vq.png" /> </a>
+
+</p>
+
+> This package is part of a larger ecosystem of packages with a shared
+> vision: solving common Shiny issues and improving Shiny apps with
+> minimal effort, minimal code changes, and straightforward
+> documentation. Other packages for your Shiny apps:
+
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Description</th>
+<th>Demo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://deanattali.com/shinyjs/">shinyjs</a></td>
+<td>💡 Easily improve the user experience of your Shiny apps in seconds</td>
+<td><a href="https://deanattali.com/shinyjs/overview#demo">🔗</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/daattali/shinyalert">shinyalert</a></td>
+<td>🗯️ Easily create pretty popup messages (modals) in Shiny</td>
+<td><a href="https://daattali.com/shiny/shinyalert-demo/">🔗</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/daattali/shinyscreenshot/">shinyscreenshot</a></td>
+<td>📷 Capture screenshots of entire pages or parts of pages in Shiny apps</td>
+<td><a href="https://daattali.com/shiny/shinyscreenshot-demo/">🔗</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/daattali/shinycssloaders/">shinycssloaders</a></td>
+<td>⌛ Add loading animations to a Shiny output while it’s recalculating</td>
+<td><a href="https://daattali.com/shiny/shinycssloaders-demo/">🔗</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/daattali/colourpicker/">colourpicker</a></td>
+<td>🎨 A colour picker tool for Shiny and for selecting colours in plots</td>
+<td><a href="https://daattali.com/shiny/colourInput/">🔗</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/daattali/shinybrowser/">shinybrowser</a></td>
+<td>🌐 Find out information about a user’s web browser in Shiny apps</td>
+<td><a href="https://daattali.com/shiny/shinybrowser-demo/">🔗</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/daattali/shinydisconnect/">shinydisconnect</a></td>
+<td>🔌 Show a nice message when a Shiny app disconnects or errors</td>
+<td><a href="https://daattali.com/shiny/shinydisconnect-demo/">🔗</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/daattali/shinyforms/">shinyforms</a></td>
+<td>📝 Easily create questionnaire-type forms with Shiny</td>
+<td>WIP</td>
+</tr>
+</tbody>
+</table>
+
 ## Demo
 
-[Click here](https://daattali.com/shiny/timevis-demo/) to view a live
-interactive demo of `timevis`.
+[Click here](https://daattali.com/shiny/timevis-demo/) to view an
+interactive demo of many {timevis} features.
+
+Or check out examples from real users: [Pet Records by Jenna
+Allen](https://jennadallen.shinyapps.io/pet-records-app/), [Mohamad
+Ghassany’s life timeline](https://www.mghassany.com/blog/my-timetable/),
+[an English Premier League game
+timeline](https://vidigalbr.shinyapps.io/timevis_premier_league/). If
+you create a cool timeline with {timevis} and want to share it, I’d love
+to [hear about it](https://deanattali.com/contact/)\!
+
+<h2 id="sponsors">
+
+Sponsors 🏆
+
+</h2>
+
+> There are no sponsors yet
+
+[Become the first sponsor for
+{timevis}\!](https://github.com/sponsors/daattali/sponsorships?tier_id=39856)
 
 ## Table of contents
 
@@ -51,7 +147,7 @@ Installation
 
 </h2>
 
-`timevis` is available through both CRAN and GitHub:
+{timevis} is available through both CRAN and GitHub:
 
 To install the stable CRAN version:
 
@@ -62,8 +158,8 @@ install.packages("timevis")
 To install the latest development version from GitHub:
 
 ``` r
-install.packages("devtools")
-devtools::install_github("daattali/timevis")
+install.packages("remotes")
+remotes::install_github("daattali/timevis")
 ```
 
 <h2 id="usage">
@@ -79,7 +175,7 @@ library(timevis)
 timevis()
 ```
 
-![Minimal timeline](inst/img/minimal.png "fig:")
+![Minimal timeline](inst/img/minimal.png)
 
 You can add data to the timeline by supplying a data.frame
 
@@ -94,12 +190,12 @@ data <- data.frame(
 timevis(data)
 ```
 
-![Basic timeline](inst/img/basic.png "fig:")
+![Basic timeline](inst/img/basic.png)
 
 Every item must have a `content` and a `start` variable. If the item is
 a range rather than a single point in time, you can supply an `end` as
 well. `id` is only required if you want to access or manipulate an item.
-There are more variables that can be used in the data.frame -- they are
+There are more variables that can be used in the data.frame – they are
 all documented in the help file for `?timevis()` under the **Data
 format** section.
 
@@ -113,12 +209,12 @@ The content of an item can even include HTML, which makes it easy to
 show any kind of data in a timeline, such as the matches of the 2014
 World Cup:
 
-![World cup timeline](inst/img/worldcup.png "fig:")
+![World cup timeline](inst/img/worldcup.png)
 
 If you know some CSS, you can completely customize the look of the
 timeline:
 
-![Custom style timeline](inst/img/customstyle.png "fig:")
+![Custom style timeline](inst/img/customstyle.png)
 
 By default, a timeline will show the current date as a red vertical line
 and will have zoom in/out buttons. You can supply many customization
@@ -146,17 +242,17 @@ Groups
 </h2>
 
 You can use the groups feature to group together multiple items into
-different "buckets". When using groups, all items with the same group
+different “buckets”. When using groups, all items with the same group
 are placed on one line. A vertical axis is displayed showing the group
 names. Grouping items can be useful for a wide range of applications,
 for example when showing availability of multiple people, rooms, or
 other resources next to each other. You can also think of groups as
-"adding a Y axis", if that helps.
+“adding a Y axis”, if that helps.
 
-Here is an example of a timeline that has three groups: "Library",
-"Gym", and "Pool":
+Here is an example of a timeline that has three groups: “Library”,
+“Gym”, and “Pool”:
 
-![Groups timeline](inst/img/groups.png "fig:")
+![Groups timeline](inst/img/groups.png)
 
 In order to use groups, items in the data need to have group ids, and a
 separate dataframe containing the group information needs to be
@@ -192,7 +288,7 @@ This method of manipulating a timeline is especially useful when
 creating timeline widgets in the R console or in R markdown documents
 because it can be used directly when initializing the widget.
 
-### 2\. Timeline manipulation using a timeline's ID
+### 2\. Timeline manipulation using a timeline’s ID
 
 In Shiny apps, you can manipulate a timeline widget at any point after
 its creation by referring to its ID. For example:
@@ -217,13 +313,12 @@ shinyApp(ui = ui, server = server)
 </pre>
 
 You can even chain these functions and use this manipulation code
-instead of the bold
-    code:
+instead of the bold code:
 
     addItem("mytime", list(id = "item1", content = "one", start = "2016-08-01")) %>%
       centerItem("item1")
 
-*Technical note: If you're trying to understand how both methods of
+*Technical note: If you’re trying to understand how both methods of
 timeline manipulation work, it might seem very bizarre to you. The
 reason they work is that every manipulation function accepts either a
 `timevis` object or the ID of one. In order to make chaining work, the
@@ -249,8 +344,8 @@ Retrieving data from the widget
 It is possible to retrieve data from a timeline in a Shiny app. When a
 timeline widget is created in a Shiny app, there are four pieces of
 information that are always accessible as Shiny inputs. These inputs
-have special names based on the timeline's id. Suppose that a timeline
-is created with an `outputId` of **"mytime"**, then the following four
+have special names based on the timeline’s id. Suppose that a timeline
+is created with an `outputId` of **“mytime”**, then the following four
 input variables will be available:
 
   - **input$mytime\_data** - will return a data.frame containing the
@@ -268,6 +363,8 @@ input variables will be available:
     the minimum and maximum dates currently visible in the timeline. The
     input is updated every time the viewable window of dates is updated
     (by zooming or moving the window).
+  - **input$mytime\_visible** - will return a list of IDs of items
+    currently visible in the timeline.
 
 -----
 
@@ -277,12 +374,12 @@ want to see how those examples were created, the full code for the
 examples is inside
 [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).
 
-If you create any cool timelines that you'd like to share with me, or if
-you want to get in touch with me for any reason, feel free to [contact
-me](https://deanattali.com/contact)\!
-
 Lastly, if you want to learn how to develop an htmlwidget to have
 similar features as this package, you can check out the
 [`timevisBasic`](https://github.com/daattali/timevisBasic) package or
 [my tutorial on htmlwidgets
-tips](https://deanattali.com/blog/advanced-htmlwidgets-tips).
+tips](https://deanattali.com/blog/advanced-htmlwidgets-tips/).
+
+## Credits
+
+Logo design by [Alfredo Hernández](https://aldomann.com/).
