@@ -26,12 +26,6 @@ fluidPage(
     tags$meta(name = "twitter:description", content = share$description),
     tags$meta(name = "twitter:image", content = share$image)
   ),
-  tags$a(
-    href="https://github.com/daattali/timevis",
-    tags$img(style="position: absolute; top: 0; right: 0; border: 0;",
-             src="github-orange-right.png",
-             alt="Fork me on GitHub")
-  ),
   div(id = "header",
     div(id = "title",
       "timevis"
@@ -46,6 +40,13 @@ fluidPage(
         tags$a(href = "https://github.com/daattali/timevis", "on GitHub"),
         HTML("&bull;"),
         tags$a(href = "https://github.com/sponsors/daattali", "Support my work"), "❤"
+    ),
+    br(),
+    tags$a(
+      "View Documentation", icon("external-link"),
+      href = "https://github.com/daattali/timevis#readme",
+      class = "btn btn-lg btn-default",
+      style = "text-shadow: none;"
     )
   ),
   tabsetPanel(
@@ -166,20 +167,29 @@ fluidPage(
       )
     ),
     tabPanel(
-      div(icon("question"), "Usage"),
+      div(icon("link"), "Crosstalk"),
       div(
-        id = "usage-tab",
+        id = "crosstalk-tab",
+        tags$p(strong(
+          "{timevis} is fully compatible with",
+          tags$a("Crosstalk", href = "https://github.com/rstudio/crosstalk"),
+        )),
         tags$p(
-          "{timevis} lets you create rich and fully interactive timeline visualizations in R. Timelines can be included in Shiny apps or R markdown documents. {timevis} includes an extensive API to manipulate a timeline after creation, and supports getting data out of the visualization into R. This package is based on the",
-          tags$a("visjs", href="https://visjs.github.io/vis-timeline/docs/timeline/"), "Timeline JavaScript library."
+          "The data in the timeline and the plot below are linked - select any events in the timeline to see",
+          "them highlighted on the plot, and vice versa."
         ),
-        br(),
-        tags$a(
-          "View Documentation", icon("external-link"),
-          href = "https://github.com/daattali/timevis#readme",
-          class = "btn btn-lg btn-success"
+        HTML("Use <i>ctrl</i> or <i>shift</i> to select multiple events"),
+        fluidRow(
+          column(
+            6,
+            timevisOutput("timelineCrosstalk")
+          ),
+          column(
+            6,
+            d3scatter::d3scatterOutput("plot")
+          )
         ),
-        br(), br()
+        br()
       )
     )
   ),

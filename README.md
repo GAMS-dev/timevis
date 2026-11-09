@@ -14,6 +14,9 @@
   <a href="https://cran.r-project.org/package=timevis">
     <img src="https://www.r-pkg.org/badges/version/timevis" alt="CRAN version" />
   </a>
+  <a href="https://paypal.me/daattali/20">
+    <img src="http://i.imgur.com/vCIGFrH.png" />
+  </a>
 </p>
 
 ---
@@ -34,9 +37,6 @@ JavaScript library.
 <p align="center">
   <a style="display: inline-block;" href="https://github.com/sponsors/daattali">
     <img height="35" src="https://i.imgur.com/034B8vq.png" />
-  </a>
-  <a style="display: inline-block;" href="https://paypal.me/daattali">
-    <img height="35" src="https://camo.githubusercontent.com/0e9e5cac101f7093336b4589c380ab5dcfdcbab0/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e40312e302e302f646973742f627574746f6e2e737667" />
   </a>
 </p>
 
@@ -84,6 +84,7 @@ Sponsors 🏆
   - [Functions to manipulate a timeline](#manipulate-api)
   - [In a Shiny app](#shiny-apps)
       - [Retrieving data from the widget](#retrieve-data)
+  - [Crosstalk support](#crosstalk)
 
 <h2 id="install">
 
@@ -319,6 +320,27 @@ input variables will be available:
     (by zooming or moving the window).
   - **input$mytime\_visible** - will return a list of IDs of items
     currently visible in the timeline.
+
+<h2 id="crosstalk">
+
+Crosstalk support
+
+</h2>
+
+{timevis} is fully compatible with [crosstalk](https://github.com/rstudio/crosstalk). This means that you can provide it with a crosstalk `SharedData` object to select/filter data across multiple Shiny widgets.
+
+Here is a simple example:
+
+``` r
+df <- data.frame(start = c(Sys.Date(), Sys.Date() - 1, Sys.Date() - 2), content = 1:3)
+shared_df <- crosstalk::SharedData$new(df)
+crosstalk::bscols(
+  timevis(shared_df, options = list(multiselect = TRUE), showZoom = FALSE, width = "100%"),
+  DT::datatable(shared_df)
+)
+```
+
+If you select any events in the timeline (use *ctrl* or *shift* to select multiple events), then the table will automatically select those as well, and vice versa.
 
 -----
 

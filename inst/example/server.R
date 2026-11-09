@@ -107,4 +107,14 @@ function(input, output, session) {
   observeEvent(input$zoomOut, {
     zoomOut("timelineInteractive", input$zoomBy, animation = input$animate)
   })
+
+  shared_df <- crosstalk::SharedData$new(dataWC)
+
+  output$timelineCrosstalk <- renderTimevis({
+    timevis(shared_df, options = list(multiselect = TRUE))
+  })
+  output$plot <- d3scatter::renderD3scatter({
+    d3scatter::d3scatter(shared_df, x = ~goalsHome, y = ~goalsAway,
+                         x_label = "Home Goals", y_label = "Away Goals")
+  })
 }

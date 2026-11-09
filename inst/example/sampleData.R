@@ -1,6 +1,5 @@
 # Simple timeline with 4 items
 dataBasic <- data.frame(
-  id = 1:4,
   content = c("Item one", "Item two" ,"Ranged item", "Item four"),
   start   = c("2016-01-10", "2016-01-11", "2016-01-20", "2016-02-14"),
   end    = c(NA, NA, "2016-02-04", NA)
@@ -39,7 +38,6 @@ templateWC <- function(stage, team1, team2, score1, score2) {
 
 # Data for world cup 2014
 dataWC <- data.frame(
-  id = 1:7,
   start = c(
     "2014-07-04 13:00",
     "2014-07-04 17:00",
@@ -57,12 +55,13 @@ dataWC <- data.frame(
     templateWC("semi-finals", "Brazil", "Germany", 1, 7),
     templateWC("semi-finals", "Netherlands", "Argentina", "0 (2)", "0 (4)"),
     templateWC("final", "Germany", "Argentina", 1, 0)
-  )
+  ),
+  goalsHome = c(0, 2, 1, 4, 1, 2, 1),
+  goalsAway = c(1, 1, 0, 3, 7, 4, 0)
 )
 
 # Data for groups example (this data also gets exported in the package)
 timevisData <- data.frame(
-  id = 1:14,
   content = c(
     "Open", "Open", "Half price entry",
     "Open", "Adults only", "Open", "Staff meeting",
